@@ -100,7 +100,12 @@
 ## 7.3.0
 * Update RabbitMQ client to 6.0 - thanks [mathiasnohall]
 
-
+## 7.3.1-b6
+* Add code to manually transfer basic auth credentials from connection string to connection factory
+* In RabbitMqTransport.Receive call QueueDeclarePassive only if declare input queue is true - thanks [marcoariboni]
+* Use `Stopwatch` instead of `DateTime.Now` in `SharedQueue` to do the timeout math
+* More push-based operations - thanks [zlepper]
+* Truncate header values when they're too big to fit - thanks [zlepper]
 
 ---
 
@@ -110,6 +115,7 @@
 [jarikp]: https://github.com/jarikp
 [K3llr]: https://github.com/K3llr
 [kyrrem]: https://github.com/kyrrem
+[marcoariboni]: https://github.com/marcoariboni
 [mathiasnohall]: https://github.com/mathiasnohall
 [michalsteyn]: https://github.com/michalsteyn
 [nebelx]: https://github.com/nebelx
@@ -117,3 +123,4 @@
 [ronnyek]: https://github.com/ronnyek
 [rsivanov]: https://github.com/rsivanov
 [samartzidis]: https://github.com/samartzidis
+[zlepper]: https://github.com/zlepper
