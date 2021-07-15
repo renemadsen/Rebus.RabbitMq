@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using RabbitMQ.Client;
-using Rebus.Extensions;
 using Rebus.Logging;
 using Rebus.Tests.Contracts.Transports;
 using Rebus.Transport;
@@ -12,6 +11,7 @@ namespace Rebus.RabbitMq.Tests
     {
         // connection string for default docker instance
         public const string ConnectionString = "amqp://guest:guest@localhost:5672";
+        
         readonly List<IDisposable> _disposables = new List<IDisposable>();
         readonly HashSet<string> _queuesToDelete = new HashSet<string>();
 
@@ -54,6 +54,17 @@ namespace Rebus.RabbitMq.Tests
                 DeleteQueue(queue);
             }
             _queuesToDelete.Clear();
+        }
+
+        public static void CreateQueue(string queueName)
+        {
+            var connectionFactory = new ConnectionFactory { Uri = new Uri(ConnectionString) };
+
+            using (var connection = connectionFactory.CreateConnection())
+            using (var model = connection.CreateModel())
+            {
+                model.QueueDeclare(queueName, true, false, false);
+            }
         }
 
         public static void DeleteQueue(string queueName)
